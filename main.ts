@@ -23,6 +23,10 @@ if (PITCH.length < 1 || PITCH.length > 240 || PITCH.trim().length === 0) {
   console.error(`entry must be 1-240 characters of non-whitespace text, got ${PITCH.length}`);
   process.exit(1);
 }
+if (/[\r\n]/.test(PITCH)) {
+  console.error('entry must be a single line with no line breaks');
+  process.exit(1);
+}
 const sentences = PITCH.split(/[.!?]+/).filter((s) => s.trim().length > 0);
 if (sentences.length !== 1) {
   console.error(`entry must be one sentence, got ${sentences.length}: ${JSON.stringify(PITCH)}`);
